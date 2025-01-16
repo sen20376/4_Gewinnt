@@ -1,0 +1,47 @@
+/* --- Styling für die Spielfeld-Buttons --- */
+.button {
+    -fx-background-radius: 25; /* Runde Buttons */
+    -fx-min-width: 50px;       /* Mindestbreite */
+    -fx-min-height: 50px;      /* Mindesthöhe */
+    -fx-max-width: 50px;       /* Maximale Breite */
+    -fx-max-height: 50px;      /* Maximale Höhe */
+    -fx-background-color: lightgray; /* Standard-Hintergrundfarbe */
+    -fx-border-color: black;         /* Rahmenfarbe */
+    -fx-border-radius: 25;           /* Runde Rahmen */
+    -fx-border-width: 2;             /* Rahmenbreite */
+}
+
+/* Geändertes Styling, wenn ein Button gedrückt wird */
+.button:pressed {
+    -fx-background-color: gray; /* Hintergrundfarbe beim Drücken */
+}
+
+/* Styling für den roten Spieler */
+.red {
+    -fx-background-color: red;
+    -fx-background-radius: 25; /* Runde Form */
+}
+
+/* Styling für den blauen Spieler */
+.blue {
+    -fx-background-color: blue;
+    -fx-background-radius: 25; /* Runde Form */
+}
+
+/* --- Styling für die Steuerungs-Buttons ("Neues Spiel" und "Vollbild umschalten") --- */
+.normal-button {
+    -fx-background-radius: 0; /* Keine Rundung */
+    -fx-border-radius: 0;     /* Keine Rahmenrundung */
+    -fx-min-width: 100px;     /* Mindestbreite */
+    -fx-min-height: 30px;     /* Mindesthöhe */
+    -fx-background-color: lightblue; /* Hintergrundfarbe */
+    -fx-border-color: black;        /* Rahmenfarbe */
+    -fx-border-width: 1;            /* Rahmenbreite */
+    -fx-font-size: 14px;            /* Schriftgröße */
+    -fx-font-weight: bold;          /* Fettschrift */
+}
+
+/* Geändertes Styling für gedrückte Steuerungs-Buttons */
+.normal-button:pressed {
+    -fx-background-color: deepskyblue; /* Hintergrundfarbe beim Drücken */
+}
