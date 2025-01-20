@@ -10,27 +10,27 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.viergewinntbox.Game">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.viergewinntbox.Game">
     <children>
         <!-- Menüleiste -->
-        <MenuBar layoutX="0.0" layoutY="0.0" AnchorPane.topAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <MenuBar layoutX="0.0" layoutY="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <menus>
                 <Menu mnemonicParsing="false" text="Datei">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Neues Spiel" onAction="#handleNewGame"/>
-                        <MenuItem mnemonicParsing="false" text="Beenden" onAction="#handleClose"/>
+                        <MenuItem mnemonicParsing="false" onAction="#handleNewGame" text="Neues Spiel" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleClose" text="Beenden" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Hilfe">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Über"/>
+                        <MenuItem mnemonicParsing="false" text="Über" />
                     </items>
                 </Menu>
             </menus>
         </MenuBar>
         <!-- Layout für Spielfeld und Buttons -->
-        <VBox layoutX="0.0" layoutY="25.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0" AnchorPane.bottomAnchor="0.0" spacing="10" alignment="CENTER">
-            <GridPane fx:id="grid" gridLinesVisible="true" hgap="5" vgap="5" alignment="CENTER">
+        <VBox alignment="CENTER" layoutX="0.0" layoutY="25.0" spacing="10" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+            <GridPane fx:id="grid" alignment="CENTER" hgap="5" vgap="5">
                 <!-- Spalten- und Zeilenbeschränkungen -->
                 <columnConstraints>
                     <ColumnConstraints />
@@ -52,9 +52,9 @@
             </GridPane>
 
             <!-- Button-Leiste -->
-            <VBox spacing="10" alignment="CENTER">
-                <Button text="Neues Spiel" onAction="#handleNewGame"/>
-                <Button fx:id="fullscreenButton" text="Vollbild umschalten"/>
+            <VBox alignment="CENTER" spacing="10">
+                <Button onAction="#handleNewGame" text="Neues Spiel" />
+                <Button fx:id="fullscreenButton" text="Vollbild umschalten" />
             </VBox>
         </VBox>
     </children>
