@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("/com/example/viergewinntbox/Oberflaeche.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/com/example/viergewinntbox/GUI.fxml"));
 
         // Titel der Seite
         primaryStage.setTitle("4 Gewinnt");

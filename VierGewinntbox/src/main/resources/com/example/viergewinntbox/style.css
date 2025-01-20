@@ -28,6 +28,7 @@
     -fx-background-radius: 25; /* Runde Form */
 }
 
+/*  Notiz: Neues Spiel und Vollbild Button sind nicht als .normal-button */
 /* --- Styling für die Steuerungs-Buttons ("Neues Spiel" und "Vollbild umschalten") --- */
 .normal-button {
     -fx-background-radius: 0; /* Keine Rundung */

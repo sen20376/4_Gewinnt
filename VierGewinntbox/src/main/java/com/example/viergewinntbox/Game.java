@@ -90,7 +90,11 @@ public class Game {
     // Überprüft, ob das Spiel gewonnen oder unentschieden ist
     private boolean checkGameOver(int row, int col) {
         if (checkWin(row, col)) {
-            showWinnerAlert(currentPlayer ? player1Name : player2Name);
+            if (currentPlayer) {
+                showWinnerAlert(player1Name);
+            } else {
+                showWinnerAlert(player2Name);
+            }
             return true;
         } else if (isBoardFull()) {
             showDrawAlert();
