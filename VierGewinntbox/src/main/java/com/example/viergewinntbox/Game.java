@@ -20,7 +20,6 @@ public class Game {
 
     private static final String RED_COLOR = "-fx-background-color: red;"; // Spieler 1 (Rot)
     private static final String BLUE_COLOR = "-fx-background-color: blue;"; // Spieler 2 (Blau)
-    private static final String WINNER_STYLE = "-fx-background-color: lightgreen; -fx-border-width: 3px;"; // Stil der Gewinn-Markierung
 
     private static final String DEFAULT_PLAYER1_NAME = "Spieler Rot";
     private static final String DEFAULT_PLAYER2_NAME = "Spieler Blau";
@@ -177,12 +176,22 @@ public class Game {
         return count;
     }
 
-    // Hebt die Gewinn-Buttons hervor
     private void highlightWinningButtons(List<Button> winningButtons) {
+        String borderColor;
+        if (currentPlayer) {
+            borderColor = "red"; // Spieler 1: Rot
+        } else {
+            borderColor = "blue"; // Spieler 2: Blau
+        }
+
+        String winningStyle = "-fx-background-color: lightgreen; -fx-border-color: " + borderColor + "; -fx-border-width: 5px;";
+
         for (int i = 0; i < winningButtons.size(); i++) {
-            winningButtons.get(i).setStyle(WINNER_STYLE);
+            Button button = winningButtons.get(i); // Hole den Button aus der Liste
+            button.setStyle(winningStyle); // Wende den Stil an
         }
     }
+
 
     // Überprüft, ob das Spielfeld vollständig gefüllt ist
     private boolean isBoardFull() {
