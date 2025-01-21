@@ -6,6 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.scene.image.ImageView;
+import javafx.application.Platform;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +20,7 @@ public class Game {
 
     private static final String RED_COLOR = "-fx-background-color: red;"; // Spieler 1 (Rot)
     private static final String BLUE_COLOR = "-fx-background-color: blue;"; // Spieler 2 (Blau)
-    private static final String WINNER_STYLE = "-fx-border-color: lightgreen; -fx-border-width: 3px;"; // Stil der Gewinn-Markierung
+    private static final String WINNER_STYLE = "-fx-background-color: lightgreen; -fx-border-width: 3px;"; // Stil der Gewinn-Markierung
 
     private static final String DEFAULT_PLAYER1_NAME = "Spieler Rot";
     private static final String DEFAULT_PLAYER2_NAME = "Spieler Blau";
@@ -34,13 +36,35 @@ public class Game {
     @FXML
     private Button fullscreenButton;
 
+    @FXML
+    private ImageView backgroundImage;
+
+
     // Initialisiert das Spiel beim Starten
     @FXML
     public void initialize() {
         getPlayerNames();
         initializeButtons();
         setupFullscreenButton();
+        Platform.runLater(this::setupBackgroundResize);
     }
+
+    private void setupBackgroundResize() {
+        // Hol die Hauptbühne (Stage)
+        Stage stage = (Stage) backgroundImage.getScene().getWindow();
+
+        // Reagiere auf Änderungen der Fensterbreite
+        stage.widthProperty().addListener((observable, oldValue, newValue) -> {
+            backgroundImage.setFitWidth(newValue.doubleValue());
+        });
+
+        // Reagiere auf Änderungen der Fensterhöhe
+        stage.heightProperty().addListener((observable, oldValue, newValue) -> {
+            backgroundImage.setFitHeight(newValue.doubleValue());
+        });
+    }
+
+
 
     // Erstellt die Buttons für das Spielfeld und fügt sie dem GridPane hinzu
     private void initializeButtons() {
@@ -123,6 +147,7 @@ public class Game {
     // Zählt die zusammenhängenden Felder in einer Richtung
     private int checkDirection(int row, int col, int rowDir, int colDir, String color) {
         List<Button> winningButtons = new ArrayList<>(); // Liste für Gewinn-Buttons
+        winningButtons.add(buttons[row][col]);
         int count = countInDirection(row, col, rowDir, colDir, color, winningButtons) +
                 countInDirection(row, col, -rowDir, -colDir, color, winningButtons) + 1; // +1 für das aktuelle Feld
 
