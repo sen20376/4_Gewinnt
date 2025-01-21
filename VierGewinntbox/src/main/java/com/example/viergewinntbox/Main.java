@@ -10,13 +10,13 @@ import javafx.stage.Stage;
 public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("/com/example/viergewinntbox/GUI.fxml"));
-
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/viergewinntbox/StartScreen.fxml"));
+        Scene scene = new Scene(loader.load(), 500, 500);
         // Titel der Seite
         primaryStage.setTitle("4 Gewinnt");
 
         // Erstellen einer Szene
-        Scene scene = new Scene(root, 500, 500);
+
 
         // Lade die CSS-Datei für das Styling
         scene.getStylesheets().add(getClass().getResource("/com/example/viergewinntbox/style.css").toExternalForm());

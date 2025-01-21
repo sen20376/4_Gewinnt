@@ -33,9 +33,9 @@
 .normal-button {
     -fx-background-radius: 0; /* Keine Rundung */
     -fx-border-radius: 0;     /* Keine Rahmenrundung */
-    -fx-min-width: 100px;     /* Mindestbreite */
+    -fx-min-width: 150px;     /* Mindestbreite */
     -fx-min-height: 30px;     /* Mindesthöhe */
-    -fx-background-color: lightblue; /* Hintergrundfarbe */
+    -fx-background-color: white; /* Hintergrundfarbe */
     -fx-border-color: black;        /* Rahmenfarbe */
     -fx-border-width: 1;            /* Rahmenbreite */
     -fx-font-size: 14px;            /* Schriftgröße */
@@ -46,3 +46,4 @@
 .normal-button:pressed {
     -fx-background-color: deepskyblue; /* Hintergrundfarbe beim Drücken */
 }
+

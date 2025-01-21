@@ -4,14 +4,22 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.viergewinntbox.Game">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.viergewinntbox.Game">
     <children>
+        <!-- Hintergrundbild -->
+        <ImageView fitWidth="${width}" fitHeight="${height}" preserveRatio="true" pickOnBounds="true">
+            <image>
+                <Image url="@Background.png" />
+            </image>
+        </ImageView>
         <!-- Menüleiste -->
         <MenuBar layoutX="0.0" layoutY="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <menus>
@@ -53,8 +61,8 @@
 
             <!-- Button-Leiste -->
             <VBox alignment="CENTER" spacing="10">
-                <Button onAction="#handleNewGame" text="Neues Spiel" />
-                <Button fx:id="fullscreenButton" text="Vollbild umschalten" />
+                <Button onAction="#handleNewGame" styleClass="normal-button" text="Neues Spiel" />
+                <Button fx:id="fullscreenButton" styleClass="normal-button" text="Vollbild" />
             </VBox>
         </VBox>
     </children>
