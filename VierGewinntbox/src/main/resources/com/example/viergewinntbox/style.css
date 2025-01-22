@@ -1,14 +1,14 @@
 /* --- Styling für die Spielfeld-Buttons --- */
 .button {
     -fx-background-radius: 25; /* Runde Buttons */
-    -fx-min-width: 50px;       /* Mindestbreite */
-    -fx-min-height: 50px;      /* Mindesthöhe */
-    -fx-max-width: 50px;       /* Maximale Breite */
-    -fx-max-height: 50px;      /* Maximale Höhe */
+    -fx-min-width: 50px; /* Mindestbreite */
+    -fx-min-height: 50px; /* Mindesthöhe */
+    -fx-max-width: 50px; /* Maximale Breite */
+    -fx-max-height: 50px; /* Maximale Höhe */
     -fx-background-color: lightgray; /* Standard-Hintergrundfarbe */
-    -fx-border-color: black;         /* Rahmenfarbe */
-    -fx-border-radius: 25;           /* Runde Rahmen */
-    -fx-border-width: 2;             /* Rahmenbreite */
+    -fx-border-color: black; /* Rahmenfarbe */
+    -fx-border-radius: 25; /* Runde Rahmen */
+    -fx-border-width: 2; /* Rahmenbreite */
 }
 
 /* Geändertes Styling, wenn ein Button gedrückt wird */
@@ -28,22 +28,21 @@
     -fx-background-radius: 25; /* Runde Form */
 }
 
-/*  Notiz: Neues Spiel und Vollbild Button sind nicht als .normal-button */
 /* --- Styling für die Steuerungs-Buttons ("Neues Spiel" und "Vollbild umschalten") --- */
 .normal-button {
-    -fx-background-radius: 0; /* Keine Rundung */
-    -fx-border-radius: 0;     /* Keine Rahmenrundung */
-    -fx-min-width: 150px;     /* Mindestbreite */
-    -fx-min-height: 30px;     /* Mindesthöhe */
-    -fx-background-color: white; /* Hintergrundfarbe */
-    -fx-border-color: black;        /* Rahmenfarbe */
-    -fx-border-width: 1;            /* Rahmenbreite */
-    -fx-font-size: 14px;            /* Schriftgröße */
-    -fx-font-weight: bold;          /* Fettschrift */
+    -fx-background-radius: 5; /* Keine Rundung */
+    -fx-border-radius: 5; /* Keine Rahmenrundung */
+    -fx-min-width: 150px; /* Mindestbreite */
+    -fx-min-height: 30px; /* Mindesthöhe */
+    -fx-background-color: rgba(255, 255, 255, 0.6); /* Halbtransparenter weißer Hintergrund */
+    -fx-border-color: black; /* Rahmenfarbe */
+    -fx-border-width: 1; /* Rahmenbreite */
+    -fx-font-size: 18px; /* Schriftgröße */
+    -fx-font-weight: bolder; /* Fettschrift */
+    -fx-text-fill: black; /* Textfarbe schwarz */
 }
 
 /* Geändertes Styling für gedrückte Steuerungs-Buttons */
 .normal-button:pressed {
     -fx-background-color: deepskyblue; /* Hintergrundfarbe beim Drücken */
 }
-

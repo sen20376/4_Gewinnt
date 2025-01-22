@@ -4,23 +4,26 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
 
 <AnchorPane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.viergewinntbox.StartScreenController">
     <children>
-      <ImageView fitHeight="500.0" fitWidth="500.0" layoutX="65.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <!-- Titel des Spiels -->
+      <ImageView fitHeight="500.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@startbild.png" />
          </image>
       </ImageView>
         <!-- Titel des Spiels -->
-        <Text layoutX="114.0" layoutY="53.0" style="-fx-font-size: 36px; -fx-font-weight: bold;" text="4 Gewinnt" textAlignment="CENTER">
-         <font>
-            <Font size="34.0" />
-         </font></Text>
-
+        <TextFlow layoutX="118.0" layoutY="14.0" textAlignment="CENTER">
+            <Text style="-fx-font-size: 36px; -fx-font-weight: bold;" text="4 " />
+            <Text style="-fx-font-size: 36px; -fx-font-weight: bold;" text="Gewi" />
+            <Text style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-fill: red;" text="n" />
+            <Text style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-fill: blue;" text="n" />
+            <Text style="-fx-font-size: 36px; -fx-font-weight: bold;" text="t" />
+        </TextFlow>
         <!-- Start-Button -->
-        <Button layoutX="200.0" layoutY="200.0" onAction="#handleStartGame"  styleClass="normal-button" text="Spiel starten" textAlignment="CENTER" AnchorPane.bottomAnchor="25.0" />
+        <Button layoutX="180" layoutY="437.0" onAction="#handleStartGame" styleClass="normal-button" text="Spiel starten" textAlignment="CENTER" AnchorPane.bottomAnchor="37.666666666666686" />
     </children>
 </AnchorPane>

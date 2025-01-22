@@ -64,7 +64,6 @@ public class Game {
     }
 
 
-
     // Erstellt die Buttons für das Spielfeld und fügt sie dem GridPane hinzu
     private void initializeButtons() {
         for (int row = 0; row < ROWS; row++) {
@@ -192,7 +191,6 @@ public class Game {
         }
     }
 
-
     // Überprüft, ob das Spielfeld vollständig gefüllt ist
     private boolean isBoardFull() {
         for (int row = 0; row < ROWS; row++) {
@@ -237,7 +235,6 @@ public class Game {
         dialog.setTitle("Spieler-Namen");
         dialog.setHeaderText(null);
         dialog.setContentText("Name für " + defaultName + ":");
-
         Optional<String> result = dialog.showAndWait();
         return result.orElse(defaultName); // Falls keine Eingabe, Standardname verwenden
     }
@@ -259,11 +256,43 @@ public class Game {
         stage.setFullScreen(!stage.isFullScreen());
     }
 
-
     @FXML
     private void handleClose() {
         System.exit(0);
     }
 
+    @FXML
+    private void handleAbout() {
+        // Erstelle eine neue Alert-Box mit Informationstyp
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Über 4 Gewinnt");
+        alert.setHeaderText("Über das Spiel");
+        alert.setContentText("4 Gewinnt ist ein Strategiespiel für zwei Spieler.\n" +
+                "Ziel ist es, vier Chips in einer Reihe zu platzieren, " +
+                "horizontal, vertikal oder diagonal.\n\n");
 
+        // Zeige das Fenster und warte, bis der Benutzer es schließt
+        alert.showAndWait();
+    }
+
+    @FXML
+    private void handleCredits() {
+        // Erstelle eine neue Alert-Box mit Informationstyp
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Credits");
+        alert.setHeaderText("Entwickler und Mitwirkende");
+        alert.setContentText("Dieses Spiel wurde entwickelt:\n" +
+                "- Ahmet-Can Korkmaz\n" +
+                "- Patrick Nadler\n" +
+                "- Berkant-Yasin Sener\n" +
+                "- Nemanja Vladejic\n\n" +
+                "Besonderer Dank an:\n" +
+                "- Andrea Horvath\n" +
+                "- Christoph Vogl\n\n" +
+                "Erfinder Des Spiel 4 Gewinnt:\n" +
+                "- Howard Wexler\n" +
+                "- Ned Strongin\n\n" +
+                "Danke fürs Spielen!");
+        alert.showAndWait();  // Zeige das Fenster und warte, bis der Benutzer es schließt
+    }
 }

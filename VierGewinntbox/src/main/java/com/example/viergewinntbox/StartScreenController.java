@@ -9,7 +9,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class StartScreenController {
-
     @FXML
     private void handleStartGame(ActionEvent event) {
         try {
@@ -26,6 +25,10 @@ public class StartScreenController {
             gameStage.setTitle("4 Gewinnt");
             gameStage.setResizable(false);
             gameStage.show();
+
+            // Setze das Icon für die GUI-Stage
+            gameStage.getIcons().add(new javafx.scene.image.Image(getClass().getResourceAsStream("/com/example/viergewinntbox/icon.png")));
+
 
             // Schließe den aktuellen Startbildschirm
             Stage startStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
