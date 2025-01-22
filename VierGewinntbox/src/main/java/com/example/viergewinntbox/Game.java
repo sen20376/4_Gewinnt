@@ -19,8 +19,8 @@ public class Game {
     private static final String RED_COLOR = "-fx-background-color: red;"; // Spieler 1 (Rot)
     private static final String BLUE_COLOR = "-fx-background-color: blue;"; // Spieler 2 (Blau)
 
-    private static final String DEFAULT_PLAYER1_NAME = "Spieler Rot";
-    private static final String DEFAULT_PLAYER2_NAME = "Spieler Blau";
+    private static final String DEFAULT_PLAYER1_NAME = "Spieler1";
+    private static final String DEFAULT_PLAYER2_NAME = "Spieler2";
 
     private final Button[][] buttons = new Button[ROWS][COLUMNS];
     private boolean currentPlayer = true; // Spieler 1 = true (Rot), Spieler 2 = false (Blau)
@@ -131,7 +131,12 @@ public class Game {
 
     // Überprüft, ob der aktuelle Spieler eine Gewinnbedingung erfüllt
     private boolean checkWin(int row, int col) {
-        String currentColor = currentPlayer ? player1Color : player2Color;
+        String currentColor;
+        if (currentPlayer) {
+            currentColor = player1Color;
+        } else {
+            currentColor = player2Color;
+        }
 
         // Prüft die vier Richtungen: Horizontal, Vertikal, Diagonal (\ und /)
         return (checkDirection(row, col, 0, 1, currentColor) >= 4 || // Horizontal
@@ -174,7 +179,12 @@ public class Game {
     }
 
     private void highlightWinningButtons(List<Button> winningButtons) {
-        String borderColor = currentPlayer ? player1Color : player2Color;
+        String borderColor;
+        if (currentPlayer) {
+            borderColor = player1Color;
+        } else {
+            borderColor = player2Color;
+        }
         String winningStyle = "-fx-border-color: " + extractColorFromStyle(borderColor) + "; -fx-border-width: 5px; -fx-background-color: lightgreen;";
 
         for (Button button : winningButtons) {

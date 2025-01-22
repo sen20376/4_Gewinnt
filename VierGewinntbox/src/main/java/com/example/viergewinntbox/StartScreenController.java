@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class StartScreenController {
     @FXML
@@ -17,7 +18,7 @@ public class StartScreenController {
             Scene gameScene = new Scene(loader.load());
 
             // CSS-Datei für das Hauptspiel hinzufügen
-            gameScene.getStylesheets().add(getClass().getResource("/com/example/viergewinntbox/style.css").toExternalForm());
+            gameScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/example/viergewinntbox/style.css")).toExternalForm());
 
             // Erstelle eine neue Bühne (Stage) für das Hauptspiel
             Stage gameStage = new Stage();
@@ -27,7 +28,7 @@ public class StartScreenController {
             gameStage.show();
 
             // Setze das Icon für die GUI-Stage
-            gameStage.getIcons().add(new javafx.scene.image.Image(getClass().getResourceAsStream("/com/example/viergewinntbox/icon.png")));
+            gameStage.getIcons().add(new javafx.scene.image.Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/viergewinntbox/icon.png"))));
 
 
             // Schließe den aktuellen Startbildschirm
