@@ -1,9 +1,7 @@
 package com.example.viergewinntbox;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.scene.image.ImageView;
@@ -24,10 +22,15 @@ public class Game {
     private static final String DEFAULT_PLAYER1_NAME = "Spieler Rot";
     private static final String DEFAULT_PLAYER2_NAME = "Spieler Blau";
 
-    private Button[][] buttons = new Button[ROWS][COLUMNS];
+    private final Button[][] buttons = new Button[ROWS][COLUMNS];
     private boolean currentPlayer = true; // Spieler 1 = true (Rot), Spieler 2 = false (Blau)
+
     private String player1Name = DEFAULT_PLAYER1_NAME;
     private String player2Name = DEFAULT_PLAYER2_NAME;
+
+    private String player1Color = "-fx-background-color: red;";
+    private String player2Color = "-fx-background-color: blue;";
+
 
     @FXML
     private GridPane grid;
@@ -42,7 +45,7 @@ public class Game {
     // Initialisiert das Spiel beim Starten
     @FXML
     public void initialize() {
-        getPlayerNames();
+        getPlayerSettings();
         initializeButtons();
         setupFullscreenButton();
         Platform.runLater(this::setupBackgroundResize);
@@ -103,9 +106,9 @@ public class Game {
     // Setzt die Farbe des Buttons entsprechend dem aktuellen Spieler
     private void setButtonColor(Button button) {
         if (currentPlayer) {
-            button.setStyle(RED_COLOR); // Spieler 1 (Rot)
+            button.setStyle(player1Color);
         } else {
-            button.setStyle(BLUE_COLOR); // Spieler 2 (Blau)
+            button.setStyle(player2Color);
         }
     }
 
@@ -128,12 +131,7 @@ public class Game {
 
     // Überprüft, ob der aktuelle Spieler eine Gewinnbedingung erfüllt
     private boolean checkWin(int row, int col) {
-        String currentColor;
-        if (currentPlayer) {
-            currentColor = RED_COLOR;
-        } else {
-            currentColor = BLUE_COLOR;
-        }
+        String currentColor = currentPlayer ? player1Color : player2Color;
 
         // Prüft die vier Richtungen: Horizontal, Vertikal, Diagonal (\ und /)
         return (checkDirection(row, col, 0, 1, currentColor) >= 4 || // Horizontal
@@ -176,19 +174,21 @@ public class Game {
     }
 
     private void highlightWinningButtons(List<Button> winningButtons) {
-        String borderColor;
-        if (currentPlayer) {
-            borderColor = "red"; // Spieler 1: Rot
-        } else {
-            borderColor = "blue"; // Spieler 2: Blau
-        }
+        String borderColor = currentPlayer ? player1Color : player2Color;
+        String winningStyle = "-fx-border-color: " + extractColorFromStyle(borderColor) + "; -fx-border-width: 5px; -fx-background-color: lightgreen;";
 
-        String winningStyle = "-fx-background-color: lightgreen; -fx-border-color: " + borderColor + "; -fx-border-width: 5px;";
-
-        for (int i = 0; i < winningButtons.size(); i++) {
-            Button button = winningButtons.get(i); // Hole den Button aus der Liste
-            button.setStyle(winningStyle); // Wende den Stil an
+        for (Button button : winningButtons) {
+            button.setStyle(winningStyle);
         }
+    }
+
+    // Hilfsmethode: Extrahiert die RGB-Farbe aus dem CSS-Stil
+    private String extractColorFromStyle(String style) {
+        // Der Stil sieht z. B. so aus: "-fx-background-color: red;"
+        if (style.startsWith("-fx-background-color: ")) {
+            return style.replace("-fx-background-color: ", "").replace(";", "").trim();
+        }
+        return "gray"; // Fallback-Farbe
     }
 
     // Überprüft, ob das Spielfeld vollständig gefüllt ist
@@ -223,21 +223,94 @@ public class Game {
         handleNewGame();
     }
 
-    // Fragt die Namen der Spieler ab
-    private void getPlayerNames() {
-        player1Name = getPlayerName("Spieler Rot");
-        player2Name = getPlayerName("Spieler Blau");
+    private void getPlayerSettings() {
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setTitle("Spielereinstellungen");
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+
+        // Name und Farbauswahl für Spieler 1
+        TextField name1 = new TextField(player1Name);
+        ComboBox<String> color1 = new ComboBox<>();
+        color1.getItems().addAll("Rot", "Orange", "Gelb", "Grün", "Blau", "Lila", "Braun");
+        color1.setValue("Rot");
+
+        // Name und Farbauswahl für Spieler 2
+        TextField name2 = new TextField(player2Name);
+        ComboBox<String> color2 = new ComboBox<>();
+        color2.getItems().addAll("Rot", "Orange", "Gelb", "Grün", "Blau", "Lila", "Braun");
+        color2.setValue("Blau");
+
+        grid.add(new Label("Spieler 1 Name:"), 0, 0);
+        grid.add(name1, 1, 0);
+        grid.add(new Label("Farbe:"), 0, 1);
+        grid.add(color1, 1, 1);
+
+        grid.add(new Label("Spieler 2 Name:"), 0, 2);
+        grid.add(name2, 1, 2);
+        grid.add(new Label("Farbe:"), 0, 3);
+        grid.add(color2, 1, 3);
+
+        dialog.getDialogPane().setContent(grid);
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+        // Validierung für gleiche Farben
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == ButtonType.OK) {
+                if (color1.getValue().equals(color2.getValue())) {
+                    showErrorAlert("Beide Spieler dürfen nicht dieselbe Farbe wählen!");
+                    return null; // Rückgabe null blockiert den Dialogabschluss
+                }
+                return ButtonType.OK;
+            }
+            return dialogButton;
+        });
+
+        Optional<ButtonType> result = dialog.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            if (name1.getText().isEmpty()) {
+                player1Name = "Spieler 1";
+            } else {
+                player1Name = name1.getText();
+            }
+
+            if (name2.getText().isEmpty()) {
+                player2Name = "Spieler 2";
+            } else {
+                player2Name = name2.getText();
+            }
+
+            player1Color = mapColorNameToStyle(color1.getValue());
+            player2Color = mapColorNameToStyle(color2.getValue());
+        }
     }
 
-    // Öffnet ein Eingabefeld für die Namensabfrage
-    private String getPlayerName(String defaultName) {
-        TextInputDialog dialog = new TextInputDialog(defaultName);
-        dialog.setTitle("Spieler-Namen");
-        dialog.setHeaderText(null);
-        dialog.setContentText("Name für " + defaultName + ":");
-        Optional<String> result = dialog.showAndWait();
-        return result.orElse(defaultName); // Falls keine Eingabe, Standardname verwenden
+    // Hilfsmethode: Zeigt eine Fehlermeldung
+    private void showErrorAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Fehler");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
+
+
+    private String mapColorNameToStyle(String colorName) {
+        return switch (colorName) {
+            case "Rot" -> "-fx-background-color: red;";
+            case "Orange" -> "-fx-background-color: orange;";
+            case "Gelb" -> "-fx-background-color: yellow;";
+            case "Grün" -> "-fx-background-color: green;";
+            case "Blau" -> "-fx-background-color: blue;";
+            case "Lila" -> "-fx-background-color: purple;";
+            case "Braun" -> "-fx-background-color: brown;";
+            default -> "-fx-background-color: gray;";
+        };
+    }
+
+
 
     // Startet ein neues Spiel und setzt das Spielfeld zurück
     @FXML
@@ -289,7 +362,7 @@ public class Game {
                 "Besonderer Dank an:\n" +
                 "- Andrea Horvath\n" +
                 "- Christoph Vogl\n\n" +
-                "Erfinder Des Spiel 4 Gewinnt:\n" +
+                "Erfinder des Spiels 4 Gewinnt:\n" +
                 "- Howard Wexler\n" +
                 "- Ned Strongin\n\n" +
                 "Danke fürs Spielen!");
