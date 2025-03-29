@@ -7,3 +7,4 @@ module com.example.viergewinntbox {
     opens com.example.viergewinntbox to javafx.fxml;
     exports com.example.viergewinntbox;
 }
+

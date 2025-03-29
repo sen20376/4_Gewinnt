@@ -187,9 +187,11 @@ public class Game {
         }
         String winningStyle = "-fx-border-color: " + extractColorFromStyle(borderColor) + "; -fx-border-width: 5px; -fx-background-color: lightgreen;";
 
-        for (Button button : winningButtons) {
+        for (int i = 0; i < winningButtons.size(); i++) {
+            Button button = winningButtons.get(i);
             button.setStyle(winningStyle);
         }
+
     }
 
     // Hilfsmethode: Extrahiert die RGB-Farbe aus dem CSS-Stil
